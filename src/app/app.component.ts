@@ -3,8 +3,30 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Calc';
+  display: string = '';
+
+  addToDisplay(value: string) {
+    this.display += value;
+  }
+
+  clear() {
+    this.display = '';
+  }
+
+  operation(operator: string) {
+    if (this.display !== '') {
+      this.display += ' ' + operator + ' ';
+    }
+  }
+
+  calculate() {
+    try {
+      this.display = eval(this.display);
+    } catch (error) {
+      this.display = 'Error';
+    }
+  }
 }
